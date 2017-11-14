@@ -430,7 +430,7 @@ export default class App extends Component {
               <div className={style.intro}>
                 <Divider />
                 <p>
-                  In 2017, the US Social Security ystem will pay $955 billion in
+                  In 2017, the US Social Security system will pay $955 billion in
                   benefits. For most retirees, these payments account for{" "}
                   <a href="https://www.ssa.gov/policy/docs/chartbooks/fast_facts/2017/fast_facts17.pdf">
                     more than 50% of income
