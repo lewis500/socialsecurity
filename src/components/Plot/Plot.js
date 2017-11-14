@@ -324,13 +324,14 @@ export default class App extends Component {
               />
             ))}
           </g>
-          {stage >= 1 && (
-            <path
-              className={style.cap}
-              d={pathMaker("cap", x, y)(data)}
-              filter="url(#f3)"
-            />
-          )}
+          {stage >= 1 &&
+            stage < 4 && (
+              <path
+                className={style.cap}
+                d={pathMaker("cap", x, y)(data)}
+                filter="url(#f3)"
+              />
+            )}
           {stage < 3 && (
             <path
               className={style.awi}

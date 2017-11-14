@@ -1,6 +1,8 @@
 @import "~src/styleShared.scss";
 svg.svg {
   flex: 1;
+  user-select: none;
+  // z-index: 5;
 }
 
 circle.dot {
@@ -9,10 +11,6 @@ circle.dot {
   stroke-width: 3px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
-}
-
-circle.dot.grow {
-  transform: scale(1.1);
 }
 
 rect {
@@ -64,7 +62,7 @@ g.AIE{
 }
 
 line.AIE {
-  stroke-width: 2px;
+  stroke-width: 3px;
   stroke: $AIE;
   fill: none;
   stroke-dasharray: 5, 7;

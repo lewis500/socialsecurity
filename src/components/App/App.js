@@ -14,6 +14,7 @@ import createHistory from "history/createBrowserHistory";
 type Props = {
   rawData: Array<RawDatum>
 };
+
 const history = createHistory();
 
 const calculateAIE = (data: Array<Datum>): number =>
@@ -60,6 +61,12 @@ const Labels = ({ stage }: { stage: number }) => (
       <div className={style.earningsLabel} />
       <div> earnings</div>
     </div>
+    {stage < 3 && (
+      <div>
+        <div className={style.awiLabel} />
+        <div>Average Wage Index</div>
+      </div>
+    )}
     {stage === 1 && (
       <div>
         <div className={style.earningsCappedLabel} />
@@ -69,27 +76,22 @@ const Labels = ({ stage }: { stage: number }) => (
     {stage === 2 && (
       <div>
         <div className={style.earningsAdjustedLabel} />
-        <div>indexed, taxed earnings</div>
+        <div>indexed+taxed earnings</div>
       </div>
     )}
     {stage > 2 && (
       <div>
         <div className={style.earningsAdjustedLabel} />
-        <div>indexed, taxed, counted earnings</div>
+        <div>indexed+taxed+counted earnings</div>
       </div>
     )}
-    {stage >= 1 && (
-      <div>
-        <div className={style.capLabel} />
-        <div>cap</div>
-      </div>
-    )}
-    {stage < 3 && (
-      <div>
-        <div className={style.awiLabel} />
-        <div>average earnings</div>
-      </div>
-    )}
+    {stage >= 1 &&
+      stage < 4 && (
+        <div>
+          <div className={style.capLabel} />
+          <div>cap</div>
+        </div>
+      )}
     {stage >= 4 && (
       <div>
         <div className={style.AIELabel} />
@@ -123,13 +125,14 @@ const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
       <div className={style.text}>
         <div className={style.textTitle}>Set earnings</div>
         <p>
-          Benefits depend on <em>earnings</em>&mdash;income from working (not
-          profits, inheritance, etc). To chart earnings, click the chart to
-          create draggable dots (double click a dot to delete). The{" "}
+          Benefits depend on lifetime <em>earnings</em>&mdash;income from
+          working (not profits, inheritance, etc). To chart lifetime earnings,
+          click the chart to make draggable dots (double click to delete). The {" "}
+          National&nbsp;
           <a href="https://www.ssa.gov/oact/cola/awidevelop.html">
             Average Wage Index
           </a>{" "}
-          (shown as "average earnings") should help you pick realistic values.
+          should help you be realistic.
         </p>
         {stage < 2 && (
           <div className={style.demonstration}>
@@ -141,10 +144,10 @@ const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
       <div className={style.text}>
         <div className={style.textTitle}>Cap earnings</div>
         <p>
-          Workers and employers only pay Social Security tax (6.2% each) on
-          earnings up to a{" "}
+          Workers and employers only pay Social Security tax (6.2% each today)
+          on earnings up to a{" "}
           <a href="https://www.ssa.gov/planners/maxtax.html">cap</a>&nbsp; set
-          by the Social Security Administration each year. Only&nbsp;
+          by the Social Security Administration each year. Only these&nbsp;
           <em>taxed</em> earnings count toward retirement benefits.
         </p>
       </div>
@@ -197,12 +200,6 @@ const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
             moderate changes
           </a>
           &nbsp; are needed to keep Social Security solvent.
-        </p>
-        <p>
-          All industrialized countries provide retirement benefits, but{" "}
-          <a href="https://en.wikipedia.org/wiki/Superannuation_in_Australia">
-            some have totally different systems.
-          </a>
         </p>
         <p>
           Social Security isn't just for retirement; it sustains millions of
@@ -447,22 +444,20 @@ export default class App extends Component {
                   In 2017, the US&nbsp;
                   <a href="https://en.wikipedia.org/wiki/Social_Security_(United_States)">
                     Social Security
-                  </a>&nbsp; system will pay $955 billion in benefits to
-                  retirees, disabled workers and the families of workers who've
-                  died. For most elderly Americans, the payments account for
-                  more than 50% of income, but few people know how the payments
-                  are calculated.&nbsp;
+                  </a>&nbsp; system will pay $955 billion in benefits. For most
+                  retirees, these payments account for more than 50% of income,
+                  but few people know how they're calculated.&nbsp;
                   <a href="https://www.ssa.gov/pubs/EN-05-10070.pdf">
                     Inspired by an official pamphlet
                   </a>, this visualization calculates the baseline annual
                   benefit of someone retiring in 2017 at the&nbsp;
                   <a href="https://www.ssa.gov/planners/retire/retirechart.html">
                     full retirement age
-                  </a>&nbsp; (66-67, depending on when you were born). In real
-                  life, the system is more complex (e.g.,{" "}
+                  </a>&nbsp; (between 66 and 67). In real life, the system is
+                  more complex (e.g.,{" "}
                   <a href="https://www.ssa.gov/policy/docs/ssb/v75n3/v75n3p1.html">
                     the family maximum
-                  </a>), but here's the gist.
+                  </a>), but this piece should give you a basic idea.
                 </p>
                 <Divider />
                 <div className={style.getStarted} onClick={this.forward}>
