@@ -45,20 +45,20 @@ class AIELine extends PureComponent {
   line: ?HTMLElement;
   props: {
     AIE: number,
-    stage: number,
+    step: number,
     width: number,
     y(d: number): number
   };
-  // componentWillUpdate({ stage, y, width, AIE }) {
+  // componentWillUpdate({ step, y, width, AIE }) {
   //   if (!this.line) return;
   //   console.log(this.sel.attr("x2"));
-  //   if (stage >= 4 && !this.sel.attr("x2"))
+  //   if (step >= 4 && !this.sel.attr("x2"))
   //     this.sel
   //       .transition()
   //       .duration(350)
   //       .ease(easeCubic)
   //       .attr("x2", width);
-  //   if (stage < 4 && this.props.stage >= 4)
+  //   if (step < 4 && this.props.step >= 4)
   //     this.sel
   //       .transition()
   //       .duration(350)
@@ -67,7 +67,7 @@ class AIELine extends PureComponent {
   // }
   // componentDidMount() {
   //   this.sel = select(this.line);
-  //   if (this.props.stage >= 4)
+  //   if (this.props.step >= 4)
   //     this.sel
   //       .transition()
   //       .duration(350)
@@ -77,7 +77,7 @@ class AIELine extends PureComponent {
   // }
   format = format("$,d");
   render() {
-    const { stage, width, y, AIE } = this.props;
+    const { step, width, y, AIE } = this.props;
     return (
       <g className={style.AIE} transform={translator(0, y(AIE))}>
         <text y={-5}>avg. indexed earnings</text>
@@ -150,7 +150,7 @@ export default class App extends Component {
     AIE: number,
     yDomain: [number, number],
     xDomain: [number, number],
-    stage: number
+    step: number
   };
 
   selected: string;
@@ -183,7 +183,7 @@ export default class App extends Component {
     const { left, top, height, width } = this.rect.getBoundingClientRect();
     const y = getY(height, this.props.yDomain);
     const x = getX(width, this.props.xDomain);
-    const earnings = y.invert(e.clientY - top),
+    const earnings = Math.round(y.invert(e.clientY - top)),
       year = Math.round(x.invert(e.clientX - left));
     if (earnings < 500) return;
     let id = uniqueId();
@@ -204,8 +204,8 @@ export default class App extends Component {
     const { left, top, height, width } = this.rect.getBoundingClientRect();
     const y = getY(height, this.props.yDomain);
     const x = getX(width, this.props.xDomain);
-    const earnings = y.invert(e.clientY - top),
-      year = x.invert(e.clientX - left);
+    const earnings = Math.round(y.invert(e.clientY - top)),
+      year = Math.round(x.invert(e.clientX - left));
     if (earnings < 100) return;
     this.props.updateDot(this.selected, year, earnings);
     this.props.updateTooltip(e.clientX, e.clientY, year, earnings);
@@ -233,7 +233,7 @@ export default class App extends Component {
     } else {
       width = height = 500;
     }
-    const { stage, dots, data, AIE, yDomain, xDomain } = this.props;
+    const { step, dots, data, AIE, yDomain, xDomain } = this.props;
     const y = getY(height, yDomain);
     const x = getX(width, xDomain);
     const barWidth = getBarWidth(width, data);
@@ -279,9 +279,7 @@ export default class App extends Component {
             {data.map(d => (
               <rect
                 key={d.year}
-                className={
-                  style.earnings + " " + (stage > 1 ? style.light : "")
-                }
+                className={style.earnings + " " + (step > 1 ? style.light : "")}
                 height={height - y(d.earnings)}
                 transform={translator(x(d.year) - barWidth / 2, y(d.earnings))}
                 width={barWidth}
@@ -291,16 +289,16 @@ export default class App extends Component {
           <g>
             {data.map((d, idx) => {
               let value;
-              if (stage <= 0) value = 0;
-              else if (stage === 1) value = d.earningsCapped;
-              else if (stage === 2) value = d.earningsAdjusted;
+              if (step <= 1) value = 0;
+              else if (step === 2) value = d.earningsCapped;
+              else if (step === 3) value = d.earningsAdjusted;
               else value = d.counted ? d.earningsAdjusted : 0;
-              let bw = stage > 1 ? barWidth * 0.3 : barWidth;
+              let bw = step >= 3 ? barWidth * 0.3 : barWidth;
               return (
                 <MyRect
                   key={d.year}
                   className={
-                    stage > 1 ? style.earningsAdjusted : style.earningsCapped
+                    step >= 3 ? style.earningsAdjusted : style.earningsCapped
                   }
                   scale={y}
                   idx={idx}
@@ -324,22 +322,22 @@ export default class App extends Component {
               />
             ))}
           </g>
-          {stage >= 1 &&
-            stage < 4 && (
+          {step >= 2 &&
+            step <= 4 && (
               <path
                 className={style.cap}
                 d={pathMaker("cap", x, y)(data)}
                 filter="url(#f3)"
               />
             )}
-          {stage < 3 && (
+          {step <= 4 && (
             <path
               className={style.awi}
               d={pathMaker("awi", x, y)(data)}
               filter="url(#f3)"
             />
           )}
-          {stage > 3 && <AIELine stage={stage} AIE={AIE} y={y} width={width} />}
+          {step >= 5 && <AIELine step={step} AIE={AIE} y={y} width={width} />}
         </g>
       </svg>
     );

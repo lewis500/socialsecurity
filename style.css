@@ -11,7 +11,9 @@ html,
 body {
   height: 100%;
   width: 100%;
-  min-width: 900px; }
+  min-width: 900px;
+  margin: 0;
+  padding: 0; }
 
 #root {
   height: 100%;
@@ -22,8 +24,6 @@ body {
   background: #e4e2d9;
   color: #4a4a4a;
   font-family: "Chivo", sans-serif;
-  margin: 0;
-  padding: 0;
   font-weight: 400; }
 
 text {
@@ -62,135 +62,6 @@ text {
 .styleApp__social___3uQEm > div {
   margin-right: 10px; }
 
- {
-  /* Non solid icons get a stroke */
-  /* Solid icons get a fill */ }
-  .resp-sharing-button__link,
-  .resp-sharing-button__icon {
-    display: inline-block; }
-  .resp-sharing-button__link {
-    text-decoration: none;
-    color: #fff;
-    margin: 0.5em; }
-  .resp-sharing-button {
-    border-radius: 5px;
-    -webkit-transition: 25ms ease-out;
-    -o-transition: 25ms ease-out;
-    transition: 25ms ease-out;
-    padding: 0.5em 0.75em;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
-  .resp-sharing-button__icon svg {
-    width: 1em;
-    height: 1em;
-    margin-right: 0.4em;
-    vertical-align: top; }
-  .resp-sharing-button--small svg {
-    margin: 0;
-    vertical-align: middle; }
-  .resp-sharing-button__icon {
-    stroke: #fff;
-    fill: none; }
-  .resp-sharing-button__icon--solid,
-  .resp-sharing-button__icon--solidcircle {
-    fill: #fff;
-    stroke: none; }
-  .resp-sharing-button--twitter {
-    background-color: #55acee; }
-  .resp-sharing-button--twitter:hover {
-    background-color: #2795e9; }
-  .resp-sharing-button--pinterest {
-    background-color: #bd081c; }
-  .resp-sharing-button--pinterest:hover {
-    background-color: #8c0615; }
-  .resp-sharing-button--facebook {
-    background-color: #3b5998; }
-  .resp-sharing-button--facebook:hover {
-    background-color: #2d4373; }
-  .resp-sharing-button--tumblr {
-    background-color: #35465c; }
-  .resp-sharing-button--tumblr:hover {
-    background-color: #222d3c; }
-  .resp-sharing-button--reddit {
-    background-color: #5f99cf; }
-  .resp-sharing-button--reddit:hover {
-    background-color: #3a80c1; }
-  .resp-sharing-button--google {
-    background-color: #dd4b39; }
-  .resp-sharing-button--google:hover {
-    background-color: #c23321; }
-  .resp-sharing-button--linkedin {
-    background-color: #0077b5; }
-  .resp-sharing-button--linkedin:hover {
-    background-color: #046293; }
-  .resp-sharing-button--email {
-    background-color: #777; }
-  .resp-sharing-button--email:hover {
-    background-color: #5e5e5e; }
-  .resp-sharing-button--xing {
-    background-color: #1a7576; }
-  .resp-sharing-button--xing:hover {
-    background-color: #114c4c; }
-  .resp-sharing-button--whatsapp {
-    background-color: #25d366; }
-  .resp-sharing-button--whatsapp:hover {
-    background-color: #1da851; }
-  .resp-sharing-button--hackernews {
-    background-color: #ff6600; }
-  .resp-sharing-button--hackernews:hover,
-  .resp-sharing-button--hackernews:focus {
-    background-color: #fb6200; }
-  .resp-sharing-button--vk {
-    background-color: #507299; }
-  .resp-sharing-button--vk:hover {
-    background-color: #43648c; }
-  .resp-sharing-button--facebook {
-    background-color: #3b5998;
-    border-color: #3b5998; }
-  .resp-sharing-button--facebook:hover,
-  .resp-sharing-button--facebook:active {
-    background-color: #2d4373;
-    border-color: #2d4373; }
-  .resp-sharing-button--twitter {
-    background-color: #55acee;
-    border-color: #55acee; }
-  .resp-sharing-button--twitter:hover,
-  .resp-sharing-button--twitter:active {
-    background-color: #2795e9;
-    border-color: #2795e9; }
-  .resp-sharing-button--google {
-    background-color: #dd4b39;
-    border-color: #dd4b39; }
-  .resp-sharing-button--google:hover,
-  .resp-sharing-button--google:active {
-    background-color: #c23321;
-    border-color: #c23321; }
-  .resp-sharing-button--email {
-    background-color: #777777;
-    border-color: #777777; }
-  .resp-sharing-button--email:hover,
-  .resp-sharing-button--email:active {
-    background-color: #5e5e5e;
-    border-color: #5e5e5e; }
-  .resp-sharing-button--linkedin {
-    background-color: #0077b5;
-    border-color: #0077b5; }
-  .resp-sharing-button--linkedin:hover,
-  .resp-sharing-button--linkedin:active {
-    background-color: #046293;
-    border-color: #046293; }
-  .resp-sharing-button--reddit {
-    background-color: #5f99cf;
-    border-color: #5f99cf; }
-  .resp-sharing-button--reddit:hover,
-  .resp-sharing-button--reddit:active {
-    background-color: #3a80c1;
-    border-color: #3a80c1; }
-
-p {
-  -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto; }
-
 a {
   color: #5a99a3; }
 
@@ -199,7 +70,7 @@ img.styleApp__poster___3RurB {
   max-width: 100%;
   -webkit-box-shadow: 0 22px 34px 0 rgba(0, 0, 0, 0.16), 0px 3px 10px 0 rgba(0, 0, 0, 0.12);
           box-shadow: 0 22px 34px 0 rgba(0, 0, 0, 0.16), 0px 3px 10px 0 rgba(0, 0, 0, 0.12);
-  margin-left: 30%;
+  margin-right: -30%;
   max-height: 600px;
   -webkit-filter: contrast(125%);
           filter: contrast(125%); }
@@ -224,8 +95,7 @@ img.styleApp__poster___3RurB {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    background-color: #5a99a3;
-    width: 41%; }
+    background-color: #5a99a3; }
   .styleApp__landing___1j4jQ .styleApp__right___mjZJp {
     -webkit-box-flex: 1;
         -ms-flex: 1;
@@ -240,7 +110,7 @@ img.styleApp__poster___3RurB {
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column;
-      max-width: 64%;
+      max-width: 450px;
       height: 100%; }
     .styleApp__landing___1j4jQ .styleApp__right___mjZJp .styleApp__name___3WrSf a {
       color: #5a99a3;
@@ -303,7 +173,7 @@ img.styleApp__poster___3RurB {
           transform: translateX(-50%); }
 
 .styleApp__content___127ZB {
-  padding: 50px 60px 50px 60px;
+  padding: 50px 50px 50px 34px;
   width: 50%;
   position: relative;
   -webkit-box-sizing: border-box;
@@ -385,7 +255,8 @@ img.styleApp__poster___3RurB {
     position: relative;
     -webkit-box-flex: 1;
         -ms-flex: 1;
-            flex: 1; }
+            flex: 1;
+    margin: 0px 10px; }
   .styleApp__sidebar___1mh2d .styleApp__textContainer___2NR5V {
     height: 100%;
     width: 700%;
@@ -402,8 +273,11 @@ img.styleApp__poster___3RurB {
         -ms-flex: 1;
             flex: 1;
     font-size: 15px;
-    word-wrap: break-word;
-    line-height: 23px; }
+    line-height: 24px; }
+    .styleApp__sidebar___1mh2d .styleApp__text___NAc84 p {
+      -webkit-hyphens: auto;
+          -ms-hyphens: auto;
+              hyphens: auto; }
     .styleApp__sidebar___1mh2d .styleApp__text___NAc84 .styleApp__textTitle___QEPi6 {
       margin-top: 5px;
       margin-bottom: 5px;
@@ -469,7 +343,7 @@ img.styleApp__poster___3RurB {
     width: 16px;
     margin-right: 4px;
     height: 1px;
-    border-bottom: 2px dashed #5d9ae5; }
+    border-bottom: 2px dashed #65a6f6; }
 
 .styleApp__lineLabels___2DjUQ > div {
   display: -webkit-box;
@@ -482,16 +356,13 @@ img.styleApp__poster___3RurB {
 
 @media only screen and (max-width: 1000px) {
   img.styleApp__poster___3RurB {
-    margin-left: 5%; } }
+    margin-right: 0%; } }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1150px) {
   .styleApp__content___127ZB {
-    padding: 36px 20px; }
+    padding: 40px 20px; }
   .styleApp__sidebar___1mh2d {
-    margin-left: 10px; }
-  .styleApp__textContainer___2NR5V .styleApp__text___NAc84 {
-    font-size: 14px;
-    line-height: 20px; } }
+    margin-left: 20px; } }
 
 @media only screen and (max-height: 600px) {
   .styleApp__landing___1j4jQ .styleApp__right___mjZJp {
@@ -551,7 +422,11 @@ path.stylePIA__indicator___4OK88 {
 svg.stylePlot__svg___pxeHi {
   -webkit-box-flex: 1;
       -ms-flex: 1;
-          flex: 1; }
+          flex: 1;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 circle.stylePlot__dot___169KR {
   fill: #7b786d;
@@ -563,11 +438,6 @@ circle.stylePlot__dot___169KR {
   -o-transition: transform 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out; }
-
-circle.stylePlot__dot___169KR.stylePlot__grow___iGId8 {
-  -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1); }
 
 rect {
   stroke: none;
@@ -610,8 +480,8 @@ g.stylePlot__AIE___39YNr {
   pointer-events: none; }
 
 line.stylePlot__AIE___39YNr {
-  stroke-width: 2px;
-  stroke: #5d9ae5;
+  stroke-width: 3px;
+  stroke: #65a6f6;
   fill: none;
   stroke-dasharray: 5, 7;
   pointer-events: none; }

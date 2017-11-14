@@ -164,7 +164,7 @@ img.poster {
 }
 
 .content {
-  padding: 50px 60px 50px 34px;
+  padding: 50px 50px 50px 34px;
   width: 50%;
   position: relative;
   box-sizing: border-box;
@@ -257,8 +257,10 @@ img.poster {
     @extend .column;
     font-size: 15px;
     // word-wrap: break-word;
-    hyphens: auto;
-    line-height: 23px;
+    p {
+      hyphens: auto;
+    }
+    line-height: 24px;
     .textTitle {
       margin-top: 5px;
       margin-bottom: 5px;

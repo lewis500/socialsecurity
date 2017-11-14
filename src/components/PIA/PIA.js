@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import style from "./stylePIA.scss";
 import { scaleLinear } from "d3-scale";
 import Axis from "components/Axis";
-import { line} from "d3-shape";
+import { line } from "d3-shape";
 import { select } from "d3-selection";
 import moize from "moize";
 import { format } from "d3-format";
@@ -12,10 +12,10 @@ const axisFormat = format("$.2s");
 const formatter = format("$,d");
 
 const MAR = {
-  l:40,
-  t:5,
-  b:30,
-  r:15
+  l: 40,
+  t: 5,
+  b: 30,
+  r: 15
 };
 
 const getX = moize.maxSize(2)((width, domain) =>
@@ -30,7 +30,7 @@ const getY = moize.maxSize(2)((height, domain) =>
     .range([height, 0])
 );
 
-const thresholds = [0, 896, 5399, 1e4].map(d => d * 12);
+const thresholds = [0, 885, 5336, 1e4].map(d => d * 12);
 
 const calcBenefit = moize((earnings: number): number => {
   if (earnings <= thresholds[1]) return 0.9 * earnings;
@@ -117,17 +117,17 @@ export default class PIA extends PureComponent {
           />
         </g>
         <g transform={translator(MAR.l, MAR.t)}>
-          <path
-            d={path(thresholds)}
-            className={style.formula}
-          />
+          <path d={path(thresholds)} className={style.formula} />
           <path
             className={style.indicator}
-            d={`M0,${paymentY}L${AIEX},${paymentY}L${AIEX},${height -45}`}
+            d={`M0,${paymentY}L${AIEX},${paymentY}L${AIEX},${height - 45}`}
           />
-          <g transform={translator(x(this.props.AIE), height -30)}>
+          <g transform={translator(x(this.props.AIE), height - 30)}>
             <text className={style.label}>avg. </text>
-            <text className={style.label} y={13}> indexed earnings</text>
+            <text className={style.label} y={13}>
+              {" "}
+              indexed earnings
+            </text>
             <text className={style.label} y={25}>
               {formatter(this.props.AIE)}
             </text>
@@ -141,8 +141,9 @@ export default class PIA extends PureComponent {
             )}
           />
           <g transform={translator(4, y(calcBenefit(this.props.AIE)) + 15)}>
-            <text className={style.labelLeft}>
-              annual benefit {formatter(calcBenefit(this.props.AIE))}
+            <text className={style.labelLeft}>annual benefit</text>
+            <text className={style.labelLeft} y="15">
+              {formatter(calcBenefit(this.props.AIE))}
             </text>
           </g>
         </g>

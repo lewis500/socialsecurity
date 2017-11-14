@@ -55,44 +55,45 @@ const getData = moize.maxSize(
 
 const Divider = () => <div className={style.divider} />;
 
-const Labels = ({ stage }: { stage: number }) => (
+const Labels = ({ step }: { step: number }) => (
   <div className={style.lineLabels}>
     <div>
       <div className={style.earningsLabel} />
       <div> earnings</div>
     </div>
-    {stage < 3 && (
+    {step <= 4 && (
       <div>
         <div className={style.awiLabel} />
         <div>Average Wage Index</div>
       </div>
     )}
-    {stage === 1 && (
-      <div>
-        <div className={style.earningsCappedLabel} />
-        <div>taxed earnings</div>
-      </div>
-    )}
-    {stage === 2 && (
-      <div>
-        <div className={style.earningsAdjustedLabel} />
-        <div>indexed+taxed earnings</div>
-      </div>
-    )}
-    {stage > 2 && (
-      <div>
-        <div className={style.earningsAdjustedLabel} />
-        <div>indexed+taxed+counted earnings</div>
-      </div>
-    )}
-    {stage >= 1 &&
-      stage < 4 && (
+    {step >= 2 &&
+      step < 5 && (
         <div>
           <div className={style.capLabel} />
           <div>cap</div>
         </div>
       )}
-    {stage >= 4 && (
+    {step === 2 && (
+      <div>
+        <div className={style.earningsCappedLabel} />
+        <div>taxed earnings</div>
+      </div>
+    )}
+    {step === 3 && (
+      <div>
+        <div className={style.earningsAdjustedLabel} />
+        <div>indexed+taxed earnings</div>
+      </div>
+    )}
+    {step >= 4 && (
+      <div>
+        <div className={style.earningsAdjustedLabel} />
+        <div>indexed+taxed+counted earnings</div>
+      </div>
+    )}
+
+    {step >= 5 && (
       <div>
         <div className={style.AIELabel} />
         <div>avg. indexed earnings</div>
@@ -101,26 +102,23 @@ const Labels = ({ stage }: { stage: number }) => (
   </div>
 );
 
-const ProgressBar = ({ stage }: { stage: number }) => (
+const ProgressBar = ({ step }: { step: number }) => (
   <div className={style.progress}>
     <div className={style.title}>
-      <span>Step &nbsp;{stage + 1}</span>/7
+      <span>Step &nbsp;{step}</span>/7
     </div>
     <div className={style.container}>
-      <div
-        className={style.filled}
-        style={{ width: `${(stage + 1) / 7 * 100}%` }}
-      />
+      <div className={style.filled} style={{ width: `${step / 7 * 100}%` }} />
     </div>
   </div>
 );
 
-type TextProps = { stage: number, AIE: number, maxEarnings: number };
-const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
+type TextProps = { step: number, AIE: number, maxEarnings: number };
+const Text = ({ step, AIE, maxEarnings }: TextProps) => (
   <div className={style.textContainerOuter}>
     <div
       className={style.textContainer}
-      style={{ transform: `translateX(${-100 / 7 * stage}%)` }}
+      style={{ transform: `translateX(${-100 / 7 * (step - 1)}%)` }}
     >
       <div className={style.text}>
         <div className={style.textTitle}>Set earnings</div>
@@ -134,7 +132,7 @@ const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
           </a>{" "}
           should help you be realistic.
         </p>
-        {stage < 2 && (
+        {step <= 2 && (
           <div className={style.demonstration}>
             <img src={demonstration} height="100%" />
           </div>
@@ -156,9 +154,9 @@ const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
         <div className={style.textTitle}>Indexing</div>
         <p>
           Next, we adjust taxed earnings for changes in the standard-of-living,
-          by multiplying by an index factor tied to the Average Wage Index. For
-          example, since average earnings were only half as much in 1994 as in
-          2016, earnings from 1994 count twice as much.
+          by multiplying them by an index factor tied to the Average Wage Index.
+          For example, since average earnings were only half as much in 1994 as
+          in 2016, earnings from 1994 count twice as much.
         </p>
       </div>
 
@@ -174,36 +172,41 @@ const Text = ({ stage, AIE, maxEarnings }: TextProps) => (
         <div className={style.textTitle}>Average</div>
         <p>
           We average the top 35 years of indexed, taxed earnings to get your
-          average indexed earnings. (In real life, Social Security also divides
-          by 12 to compute Average Indexed <em>Monthly</em> Earnings, but this
-          makes no difference.)
+          average indexed earnings.
         </p>
       </div>
       <div className={style.text + " " + style.PIA}>
         <div className={style.textTitle}>Derive benefit</div>
         <p>
           Finally, we use &nbsp;
-          <a href="https://en.wikipedia.org/wiki/Primary_Insurance_Amount#Computation">
+          <a href="https://www.ssa.gov/oact/cola/piaformula.html">
             the formula below
           </a>{" "}
-          to derive the annual benefit, which arrives in monthly installments.
-          This gets adjusted for inflation every year after retirement, and is
-          used to calculate other benefits, too.
+          to derive the annual benefit, which arrives in monthly installments
+          and gets adjusted for inflation after retirement.
         </p>
-        {stage > 4 && <PIA AIE={AIE} maxEarnings={maxEarnings} />}
+        {step >= 6 && <PIA AIE={AIE} maxEarnings={maxEarnings} />}
       </div>
       <div className={style.text + " " + style.notes}>
         <div className={style.textTitle}>Notes</div>
         <p>
-          We don't make predictions because&nbsp;
-          <a href="http://budgetmodel.wharton.upenn.edu/social-security/">
-            moderate changes
+          This is not a financial planning tool, only a way to learn how Social
+          Security generally works. The Social Security Administration{" "}
+          <a href="https://www.ssa.gov/planners/benefitcalculators.html">
+            {" "}
+            provides more accurate calculators.
           </a>
-          &nbsp; are needed to keep Social Security solvent.
+        </p>
+        <p>
+          Check out this&nbsp;
+          <a href="http://budgetmodel.wharton.upenn.edu/social-security/">
+            simulator
+          </a>
+          &nbsp; where you make hard choices to keep Social Security solvent.
         </p>
         <p>
           Social Security isn't just for retirement; it sustains millions of
-          disabled people, children and widows/widowers.
+          disabled people and the families of workers who have died.
         </p>
         <p>Built w/ Webpack, d3, React, SASS & Flowtype.</p>
       </div>
@@ -218,7 +221,7 @@ const Social = () => (
         href="https://twitter.com/share?ref_src=twsrc%5Etfw"
         className="twitter-share-button"
         data-text="Social Security Retirement Benefits Explained Visually"
-        data-url="http://lewis500.github.io/socialSecurity"
+        data-url="http://lewis500.github.io/socialsecurity"
         data-via="LewisLehe"
         data-show-count="false"
       >
@@ -228,26 +231,11 @@ const Social = () => (
     <div>
       <a
         className="github-button"
-        href="https://github.com/lewis500/socialSecurity"
+        href="https://github.com/lewis500/socialsecurity"
         data-icon="octicon-star"
         aria-label="Star lewis500/socialSecurity on GitHub"
       >
         Star
-      </a>
-    </div>
-    <div
-      className="fb-share-button"
-      data-href="http://lewis500.github.io/socialSecurity"
-      data-layout="button_count"
-      data-size="small"
-      data-mobile-iframe="true"
-    >
-      <a
-        className="fb-xfbml-parse-ignore"
-        target="_blank"
-        href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flewis500.github.io%2FsocialSecurity&amp;src=sdkpreparse"
-      >
-        Share
       </a>
     </div>
   </div>
@@ -259,7 +247,7 @@ export default class App extends Component {
   xDomain: [number, number];
   state: {
     dots: Array<Dot>,
-    stage: number,
+    step: number,
     tooltip: {
       left: number,
       top: number,
@@ -274,7 +262,7 @@ export default class App extends Component {
     const a = props.rawData[0];
     const b = props.rawData[props.rawData.length - 1];
     var url = new URLSearchParams(history.location.search);
-    let stage: number = +url.get("stage") || -1;
+    let step: number = +url.get("step") || 0;
     let dots = JSON.parse(url.get("dots")) || [
       makeDot("a", a.year, a.cap / 2),
       makeDot("d", 1985, 70000),
@@ -283,7 +271,7 @@ export default class App extends Component {
     ];
     this.state = {
       dots,
-      stage,
+      step,
       tooltip: {
         active: false,
         earnings: 0,
@@ -299,15 +287,15 @@ export default class App extends Component {
 
   forward = () => {
     this.setState(
-      ({ stage }) => ({
-        stage: Math.min(stage + 1, 6)
+      ({ step }) => ({
+        step: Math.min(step + 1, 7)
       }),
       () => {
         history.push({
-          search: `?stage=${this.state.stage}&dots=${JSON.stringify(
+          search: `?step=${this.state.step}&dots=${JSON.stringify(
             this.state.dots
           )}`
-          // search: `?stage=${this.state.stage}`
+          // search: `?step=${this.state.step}`
         });
       }
     );
@@ -315,15 +303,15 @@ export default class App extends Component {
 
   backward = () => {
     this.setState(
-      ({ stage }) => ({
-        stage: Math.max(stage - 1, -1)
+      ({ step }) => ({
+        step: Math.max(step - 1, 0)
       }),
       () => {
         history.push({
-          search: `?stage=${this.state.stage}&dots=${JSON.stringify(
+          search: `?step=${this.state.step}&dots=${JSON.stringify(
             this.state.dots
           )}`
-          // search: `?stage=${this.state.stage}`
+          // search: `?step=${this.state.step}`
         });
       }
     );
@@ -348,9 +336,7 @@ export default class App extends Component {
 
   storeHistory = () => {
     history.replace({
-      search: `?stage=${this.state.stage}&dots=${JSON.stringify(
-        this.state.dots
-      )}`
+      search: `?step=${this.state.step}&dots=${JSON.stringify(this.state.dots)}`
     });
   };
 
@@ -385,17 +371,17 @@ export default class App extends Component {
     window.addEventListener("keydown", this.onKeyDown);
     this.storeHistory();
     // history.replace({
-    //   // search: `?stage=${this.state.stage}&dots=${JSON.stringify(
+    //   // search: `?step=${this.state.step}&dots=${JSON.stringify(
     //   //   this.state.dots
     //   // )}`
-    //   search: `?stage=${this.state.stage}`
+    //   search: `?step=${this.state.step}`
     // });
     this.unlisten = history.listen((location, action) => {
       var url = new URLSearchParams(location.search);
-      var c = +url.get("stage");
-      if (c !== this.state.stage)
+      var c = +url.get("step");
+      if (c !== this.state.step)
         this.setState({
-          stage: c
+          step: c
         });
     });
   }
@@ -410,12 +396,12 @@ export default class App extends Component {
   };
 
   render() {
-    const { stage, dots } = this.state;
+    const { step, dots } = this.state;
     const data = getData(dots, this.props.rawData);
     const AIE = calculateAIE(data);
 
     return (
-      <div className={style.main + " " + (stage === -1 ? " " : style.shifted)}>
+      <div className={style.main + " " + (step === 0 ? " " : style.shifted)}>
         <div className={style.landing}>
           <Social />
           <div className={style.image}>
@@ -427,7 +413,8 @@ export default class App extends Component {
                 by &nbsp;
                 <a href="http://lewislehe.com" _target="blank">
                   Lewis Lehe
-                </a>&nbsp; and &nbsp;
+                </a>
+                &nbsp; and &nbsp;
                 <a href="http://dennyshess.ch" _target="blank">
                   Dennys Hess
                 </a>
@@ -448,7 +435,7 @@ export default class App extends Component {
                   retirees, these payments account for more than 50% of income,
                   but few people know how they're calculated.&nbsp;
                   <a href="https://www.ssa.gov/pubs/EN-05-10070.pdf">
-                    Inspired by an official pamphlet
+                    Inspired by an official explainer
                   </a>, this visualization calculates the baseline annual
                   benefit of someone retiring in 2017 at the&nbsp;
                   <a href="https://www.ssa.gov/planners/retire/retirechart.html">
@@ -473,7 +460,7 @@ export default class App extends Component {
           <div className={style.chart}>
             <Plot
               dots={dots}
-              stage={stage}
+              step={step}
               AIE={AIE}
               storeHistory={this.storeHistory}
               addDot={this.addDot}
@@ -485,18 +472,18 @@ export default class App extends Component {
               updateTooltip={this.updateTooltip}
               closeTooltip={this.closeTooltip}
             />
-            <Labels stage={stage} />
+            <Labels step={step} />
           </div>
           <div className={style.sidebar}>
-            <ProgressBar stage={stage} />
-            <Text stage={stage} AIE={AIE} maxEarnings={this.yDomain[1]} />
+            <ProgressBar step={step} />
+            <Text step={step} AIE={AIE} maxEarnings={this.yDomain[1]} />
             <div className={style.buttons}>
               <div className={style.button} onClick={this.backward}>
                 <i className="fa fa-long-arrow-left" /> &nbsp; Previous Step
               </div>
               <div
                 className={
-                  style.button + " " + (stage >= 6 ? style.hidden : "")
+                  style.button + " " + (step === 7 ? style.hidden : "")
                 }
                 onClick={this.forward}
               >
