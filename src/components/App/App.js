@@ -58,7 +58,9 @@ const Divider = () => <div className={style.divider} />;
 const Labels = ({ step }: { step: number }) => (
   <div className={style.lineLabels}>
     <div>
-      <div className={style.earningsLabel} />
+      <div
+        className={style.earningsLabel + " " + (step > 1 ? style.light : "")}
+      />
       <div> earnings</div>
     </div>
     {step <= 4 && (
@@ -105,7 +107,7 @@ const Labels = ({ step }: { step: number }) => (
 const ProgressBar = ({ step }: { step: number }) => (
   <div className={style.progress}>
     <div className={style.title}>
-      <span>Step &nbsp;{step}</span>/7
+      <span>{step}</span>/7
     </div>
     <div className={style.container}>
       <div className={style.filled} style={{ width: `${step / 7 * 100}%` }} />
@@ -190,8 +192,8 @@ const Text = ({ step, AIE, maxEarnings }: TextProps) => (
       <div className={style.text + " " + style.notes}>
         <div className={style.textTitle}>Notes</div>
         <p>
-          This is not a financial planning tool, only a way to learn how Social
-          Security generally works. The Social Security Administration{" "}
+          This is not a financial planning tool, only a demonstration. The
+          Social Security Administration{" "}
           <a href="https://www.ssa.gov/planners/benefitcalculators.html">
             {" "}
             provides more accurate calculators.
@@ -205,8 +207,8 @@ const Text = ({ step, AIE, maxEarnings }: TextProps) => (
           &nbsp; where you make hard choices to keep Social Security solvent.
         </p>
         <p>
-          Social Security isn't just for retirement; it sustains millions of
-          disabled people and the families of workers who have died.
+          Social Security does more than retirement; it sustains disabled people
+          and the families of workers who have died.
         </p>
         <p>Built w/ Webpack, d3, React, SASS & Flowtype.</p>
       </div>
@@ -428,23 +430,21 @@ export default class App extends Component {
               <div className={style.intro}>
                 <Divider />
                 <p>
-                  In 2017, the US&nbsp;
-                  <a href="https://en.wikipedia.org/wiki/Social_Security_(United_States)">
-                    Social Security
-                  </a>&nbsp; system will pay $955 billion in benefits. For most
-                  retirees, these payments account for more than 50% of income,
-                  but few people know how they're calculated.&nbsp;
-                  <a href="https://www.ssa.gov/pubs/EN-05-10070.pdf">
-                    Inspired by an official explainer
-                  </a>, this visualization calculates the baseline annual
-                  benefit of someone retiring in 2017 at the&nbsp;
+                  In 2017, the US Social Security ystem will pay $955 billion in
+                  benefits. For most retirees, these payments account for{" "}
+                  <a href="https://www.ssa.gov/policy/docs/chartbooks/fast_facts/2017/fast_facts17.pdf">
+                    more than 50% of income
+                  </a>, but few people know how they're calculated. This
+                  visualization calculates the baseline annual benefit of
+                  someone retiring in 2017 at the&nbsp;
                   <a href="https://www.ssa.gov/planners/retire/retirechart.html">
                     full retirement age
-                  </a>&nbsp; (between 66 and 67). In real life, the system is
-                  more complex (e.g.,{" "}
+                  </a>&nbsp; (between 66 and 67). In real life, the system
+                  is&nbsp;
                   <a href="https://www.ssa.gov/policy/docs/ssb/v75n3/v75n3p1.html">
-                    the family maximum
-                  </a>), but this piece should give you a basic idea.
+                    more complex in many ways
+                  </a>, but we'll give you a basic idea. Use left/right arrow
+                  keys to navigate.
                 </p>
                 <Divider />
                 <div className={style.getStarted} onClick={this.forward}>

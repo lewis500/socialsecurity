@@ -319,7 +319,7 @@ img.styleApp__poster___3RurB {
   margin-top: 25px; }
   .styleApp__lineLabels___2DjUQ .styleApp__capLabel___1URm4,
   .styleApp__lineLabels___2DjUQ .styleApp__awiLabel___2gvwT {
-    margin-right: 5px;
+    margin-right: 3px;
     height: 3px;
     width: 16px; }
   .styleApp__lineLabels___2DjUQ .styleApp__capLabel___1URm4 {
@@ -332,9 +332,11 @@ img.styleApp__poster___3RurB {
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    margin-right: 4px; }
+    margin-right: 3px; }
   .styleApp__lineLabels___2DjUQ .styleApp__earningsLabel___2ST-0 {
     background-color: #9f9a89; }
+  .styleApp__lineLabels___2DjUQ .styleApp__earningsLabel___2ST-0.styleApp__light___1Fm1H {
+    background-color: #cbc9bd; }
   .styleApp__lineLabels___2DjUQ .styleApp__earningsCappedLabel___2yK_C {
     background-color: #5a99a3; }
   .styleApp__lineLabels___2DjUQ .styleApp__earningsAdjustedLabel___1xMal {

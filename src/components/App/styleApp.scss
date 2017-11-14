@@ -305,7 +305,7 @@ img.poster {
 
   .capLabel,
   .awiLabel {
-    margin-right: 5px;
+    margin-right: 3px;
     height: 3px;
     width: 16px;
   }
@@ -321,10 +321,13 @@ img.poster {
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    margin-right: 4px;
+    margin-right: 3px;
   }
   .earningsLabel {
     background-color: $earnings;
+  }
+  .earningsLabel.light {
+    background-color: #cbc9bd;
   }
   .earningsCappedLabel {
     background-color: $earningsCapped;
