@@ -1,0 +1,49 @@
+.bg {
+  opacity: 0;
+}
+
+.svg {
+  width: 100%;
+  flex: 1;
+  pointer-events: none;
+
+  :global(.tick) {
+    line,
+    path {
+      opacity: 0.33;
+    }
+    text {
+      opacity: 0.5;
+    }
+  }
+}
+
+$dot: #7b786d;
+
+circle.payment {
+
+  fill:#669ee3;
+  stroke: white;
+  stroke-width: 3px;
+}
+path.formula {
+  stroke-width: 2px;
+  stroke: #c56c68;
+  fill: none;
+}
+
+path.indicator {
+  stroke: #669ee3;
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 5, 7;
+}
+
+.label {
+  text-anchor: middle;
+}
+.label,
+.labelLeft {
+  font-family: "Chivo", sans-serif;
+  fill: #669ee3;
+}

@@ -1,0 +1,76 @@
+@import "~material-colors/dist/colors";
+g.lineLabel text {
+  font-size: 11px;
+  fill: $md-lime-a400;
+  text-anchor: middle;
+}
+
+.lineLabels {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.labels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3px;
+}
+.title {
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-left: 2px;
+  margin-bottom: 12px;
+}
+
+.lineLabels > div {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.capLabel,
+.awiLabel {
+  // border-radius: 50%;
+  margin-right: 5px;
+  height: 3px;
+  width: 16px;
+}
+.capLabel {
+  background-color: $md-lime-a400;
+}
+.awiLabel {
+  background-color: $md-teal-a400;
+}
+.earningsLabel,
+.earningsCappedLabel {
+  width: 16px;
+  height: 8px;
+  margin-right: 4px;
+}
+.earningsLabel {
+  background-color: rgba($md-grey-300, 0.3);
+}
+.earningsCappedLabel {
+  background-color: white;
+}
+.earningsAdjustedLabel {
+  width: 16px;
+  height: 3px;
+  margin-right: 5px;
+}
+.earningsAdjustedLabel {
+  background-color: rgba($md-grey-300, 0.3);
+}
+line.AIE {
+  stroke-width: 2px;
+  stroke: $md-lime-a400;
+  stroke-dasharray: 2, 2;
+  pointer-events: none;
+}
+text.AIE {
+  font-size: 12px;
+  user-select: none;
+}

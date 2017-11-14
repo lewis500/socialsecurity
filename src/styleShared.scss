@@ -1,0 +1,36 @@
+.column {
+  display: flex;
+  flex-direction: column;
+}
+$shadow-key-umbra-opacity: 0.2 !default;
+$shadow-key-penumbra-opacity: 0.14 !default;
+$shadow-ambient-shadow-opacity: 0.12 !default;
+
+//colorsof things
+$background: #e4e2d9;
+$sidebar-background: white;
+$earnings: #9f9a89;
+$earningsCapped: #5a99a3;
+$earningsAdjusted: $earningsCapped;
+$cap: #c56c68;
+$awi: #FFC107;
+$AIE: #5d9ae5;
+$dot: #7b786d;
+$fontColor: #4a4a4a;
+
+@mixin focus-shadow() {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
+}
+@mixin shadow-2dp() {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),
+    0 3px 1px -2px rgba(0, 0, 0, $shadow-key-umbra-opacity),
+    0 1px 5px 0 rgba(0, 0, 0, $shadow-ambient-shadow-opacity);
+}
+@mixin shadow-3dp() {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),
+    0 3px 3px -2px rgba(0, 0, 0, $shadow-key-umbra-opacity),
+    0 1px 8px 0 rgba(0, 0, 0, $shadow-ambient-shadow-opacity);
+}
+@mixin shadow-dennys() {
+  box-shadow: 0 22px 34px 0 rgba(black, 0.16), 0px 3px 10px 0 rgba(black, 0.12);
+}

@@ -1,0 +1,36 @@
+// @import "~material-colors/dist/colors";
+@import "~src/styleShared.scss";
+$tooltip: rgba($earningsCapped, 0.8);
+.tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  background-color: $tooltip;
+  position: absolute;
+  pointer-events: none;
+  // line-height: 24px;
+  border-radius: 2px;
+  // box-shadow: 1px 1px 2px rgba(black, 0.2);
+  @include shadow-2dp();
+  transform: translate(-50%, -100%) translate(0, -10px);
+}
+.tooltip:after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: $tooltip transparent transparent transparent;
+}
+.content {
+  font-size: 14px;
+  line-height: 21px;
+  // color: black;
+  color: white;
+  font-weight: 300;
+}
